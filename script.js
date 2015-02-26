@@ -1,8 +1,8 @@
-ar graph = {};
+var graph = {};
 
 
 $(function(){
-	graph.data = [3, 45, 67, 32, 54, 4, 87.3, 40, 57, 49, 100]
+	graph.data = {'bigData' : {'one':3, 'two':45, 'three':67, 'four':32}};
 	graph.max();
 	
 });
@@ -33,7 +33,31 @@ graph.display = function(data){
 }
 
 // D3.js
+graph.diameter = 600;
+graph.svg = d3.select('.chart').append('svg')
+	.attr('width', graph.diameter)
+	.attr('height', graph.diameter)
 
+graph.processData = function(data) {
+	var obj = graph.data.bigData;
+	var newDataset = [];
+	for(var prop in obj) { newDataSet.push({name: prop, className: prop.toLowerCase(), size: obj[prop]}); } return {children: newDataSet}; 
+} 
+
+graph.bubble = d3.layout.pack()
+	.size([graph.diameter,graph.diameter])
+	.padding(3)
+	.value(function(d){return d.size})
+
+graph.nodes = graph.bubble.nodes(graph.data)
+
+graph.vis = svg.selectAll('circle')
+	.data(nodes, function(d){return d.name});
+
+vis.enter().append('circle')
+	.attr('transform', function(d) {return 'translate(' + d.x + ',' + d.y + ')';})
+	.attr('r', function(d){return d.r; })
+	.attr('class', function(d) {return d.className;})
 
 
 
