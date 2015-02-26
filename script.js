@@ -40,8 +40,9 @@ graph.svg = d3.select('.chart').append('svg')
 
 graph.processData = function(data) {
 	var obj = graph.data.bigData;
-	var newDataset = [];
-	for(var prop in obj) { newDataSet.push({name: prop, className: prop.toLowerCase(), size: obj[prop]}); } return {children: newDataSet}; 
+	graph.newDataset = [];
+	console.log(graph.newDataset);
+	for(var prop in obj) { graph.newDataset.push({name: prop, className: prop.toLowerCase(), size: obj[prop]}); } return {children: graph.newDataset}; 
 } 
 
 graph.bubble = d3.layout.pack()
